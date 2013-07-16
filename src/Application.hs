@@ -11,7 +11,7 @@ import Snap.Snaplet
 import Snap.Snaplet.Heist
 import Snap.Snaplet.Auth
 import Snap.Snaplet.Session
-import Snap.Snaplet.PostgresSimple
+import Snap.Snaplet.PostgresqlSimple
 
 ------------------------------------------------------------------------------
 data App = App

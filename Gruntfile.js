@@ -11,18 +11,18 @@ module.exports = function (grunt) {
   // configurable paths
   var yeomanConfig = {
     app: 'app',
-    dist: 'dist'
+    dist: 'static'
   };
 
   try {
-    yeomanConfig.app = require('./component.json').appPath || yeomanConfig.app;
+    yeomanConfig.app = require('./bower.json').appPath || yeomanConfig.app;
   } catch (e) {}
 
   grunt.initConfig({
     yeoman: yeomanConfig,
     watch: {
       coffee: {
-        files: ['<%= yeoman.app %>/scripts/{,*/}*.coffee'],
+        files: ['<%= yeoman.app %>/scripts/{,*/}{,*/}{,*/}*.coffee'],
         tasks: ['coffee:dist']
       },
       jade: {
@@ -319,6 +319,7 @@ module.exports = function (grunt) {
     'jshint',
     'test',
     'coffee',
+    'jade',
     'compass:dist',
     'useminPrepare',
     'imagemin',

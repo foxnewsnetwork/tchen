@@ -19,7 +19,7 @@ import           Snap.Snaplet.Auth
 import           Snap.Snaplet.Auth.Backends.JsonFile
 import           Snap.Snaplet.Heist
 import           Snap.Snaplet.Session.Backends.CookieSession
-import           Snap.Snaplet.PostgresSimple
+import           Snap.Snaplet.PostgresqlSimple
 import           Snap.Util.FileServe
 import           Heist
 import qualified Heist.Interpreted as I
@@ -66,7 +66,8 @@ routes :: [(ByteString, Handler App App ())]
 routes = [ ("/login",    with auth handleLoginSubmit)
          , ("/logout",   with auth handleLogout)
          , ("/new_user", with auth handleNewUser)
-         , ("",          serveDirectory "static")
+         , ("",          serveDirectory "app")
+         , ("",          serveDirectory ".tmp")
          ]
 
 
@@ -86,5 +87,5 @@ app = makeSnaplet "app" "An snaplet example application." Nothing $ do
     pg <- nestSnaplet "pg" pg pgsInit
     addRoutes routes
     addAuthSplices auth
-    return $ App h s a
+    return $ App h s a pg
 
