@@ -1,0 +1,23 @@
+.blogpost {
+  &.no-image {
+    min-height: 25px;
+  }
+  min-height: 175px;
+  margin-bottom: 10px;
+  background-color: #f5f5f5;
+  border-radius: 5px;
+  padding: 10px;
+  .blog-title {
+    text-transform: capitalize;
+    border-bottom: 1px solid #e5e5e5;
+    padding-bottom: 5px;
+  }
+  .image-left {
+    float: left;
+    margin-right: 10px;
+    img {
+      width: 125px;
+      height: 125px;
+    }
+  }
+}

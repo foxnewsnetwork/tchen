@@ -1,0 +1,7 @@
+div.verticalnav
+  div.bs-docs-sidenav
+    ul.nav.nav-list.bs-docs-sidenav.affix-top
+      li(ng-repeat="nav in navs")
+        a(href="{{nav.href}}") 
+          {{nav.link}}
+          i.icon-chevron-right

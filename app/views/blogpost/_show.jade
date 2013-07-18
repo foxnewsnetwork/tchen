@@ -1,0 +1,7 @@
+div.blogpost
+  h4.blog-title
+    a(href="{{blogpost.link}}") {{blogpost.title}}
+  div.blog-contents
+    span.image-left(class="{{blogpost | blogPostImageClass }}")
+      img(src="{{blogpost.image}}")
+    {{blogpost.content}}
