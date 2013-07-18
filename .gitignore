@@ -1,7 +1,9 @@
 node_modules
 dist
+distjs
 .tmp
 .sass-cache
 app/components
 cabal-dev
 log
+log/*.log

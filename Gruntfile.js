@@ -11,7 +11,7 @@ module.exports = function (grunt) {
   // configurable paths
   var yeomanConfig = {
     app: 'app',
-    dist: 'dist'
+    dist: 'distjs'
   };
 
   try {
@@ -330,7 +330,7 @@ module.exports = function (grunt) {
     'htmlmin',
     'concat',
     'copy',
-    'cdnify',
+    // 'cdnify',
     'ngmin',
     'uglify',
     'rev',

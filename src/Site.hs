@@ -63,11 +63,12 @@ handleNewUser = method GET handleForm <|> method POST handleFormSubmit
 ------------------------------------------------------------------------------
 -- | The application's routes.
 routes :: [(ByteString, Handler App App ())]
-routes = [ ("/login",    with auth handleLoginSubmit)
+routes = [ ("/bps",      with pg handleBlogpostIndex)
+         , ("/login",    with auth handleLoginSubmit)
          , ("/logout",   with auth handleLogout)
          , ("/new_user", with auth handleNewUser)
-         , ("",          serveDirectory "app")
          , ("",          serveDirectory ".tmp")
+         , ("",          serveDirectory "app")
          ]
 
 
@@ -84,8 +85,8 @@ app = makeSnaplet "app" "An snaplet example application." Nothing $ do
     -- you'll probably want to change this to a more robust auth backend.
     a <- nestSnaplet "auth" auth $
            initJsonFileAuthManager defAuthSettings sess "users.json"
-    pg <- nestSnaplet "pg" pg pgsInit
+    p <- nestSnaplet "pg" pg pgsInit
     addRoutes routes
     addAuthSplices auth
-    return $ App h s a pg
+    return $ App h s a p
 

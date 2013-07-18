@@ -10,18 +10,13 @@
     <meta name="description" content="My portfolio site, built on Haskell Snap, Angularjs, and Twitter Bootstrap">
     <meta name="viewport" content="width=device-width">
     <title>Snap web server</title>
-    <link rel="stylesheet" type="text/css" href="/screen.css"/>
+    <link rel="stylesheet" href="styles/main.css">
   </head>
   <body ng-app="tchenApp">
     <div id="content" ng-view>
 
       <apply-content/>
     </div>
-    <script src="components/angular/angular.js"></script>
-    <script src="components/angular-resource/angular-resource.js"></script>
-    <script src="components/angular-cookies/angular-cookies.js"></script>
-    <script src="components/angular-sanitize/angular-sanitize.js"></script>
-
     <script src="components/requirejs/require.js"></script>
 
     <!-- build:js scripts/scripts.js -->

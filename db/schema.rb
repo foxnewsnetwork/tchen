@@ -13,9 +13,11 @@
 
 ActiveRecord::Schema.define(version: 20130716050333) do
 
-  create_table "blog_entry_tables", force: true do |t|
-    t.string "title"
-    t.text   "content"
+  create_table "blogposts", force: true do |t|
+    t.string   "title"
+    t.text     "content"
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
 end
