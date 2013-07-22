@@ -10,6 +10,8 @@ module Site
 
 ------------------------------------------------------------------------------
 import           Control.Applicative
+import           Control.Monad
+import           Control.Monad.IO.Class
 import           Data.ByteString (ByteString)
 import           Data.Maybe
 import qualified Data.Text as T
@@ -23,6 +25,8 @@ import           Snap.Snaplet.PostgresqlSimple
 import           Snap.Util.FileServe
 import           Heist
 import qualified Heist.Interpreted as I
+import           Data.Aeson as J
+
 ------------------------------------------------------------------------------
 import           Application
 
@@ -61,6 +65,14 @@ handleNewUser = method GET handleForm <|> method POST handleFormSubmit
 
 
 ------------------------------------------------------------------------------
+-- | Handle blogposts#index... Haskell is hard and doesn't make much sense
+handleBlogpostIndex :: Handler App Postgres ()
+handleBlogpostIndex = do
+  blogposts <- query_ "SELECT * FROM blogposts"
+  writeLBS $ J.encode (blogposts :: [BlogPost])
+
+
+-----------------------------------------------------------------------------
 -- | The application's routes.
 routes :: [(ByteString, Handler App App ())]
 routes = [ ("/bps",      with pg handleBlogpostIndex)

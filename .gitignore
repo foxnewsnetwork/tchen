@@ -7,3 +7,4 @@ app/components
 cabal-dev
 log
 log/*.log
+examples/

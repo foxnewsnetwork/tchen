@@ -34,7 +34,10 @@ Executable tchen
     text                      >= 0.11    && < 0.12,
     time                      >= 1.1     && < 1.5,
     xmlhtml                   >= 0.1,
-    snaplet-postgresql-simple >= 0.4
+    snaplet-postgresql-simple >= 0.4,
+    json                      >= 0.7,
+    transformers              >= 0.2.2.0,
+    aeson                     >= 0.6.1
 
   if flag(old-base)
     build-depends:
