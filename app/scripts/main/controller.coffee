@@ -5,3 +5,4 @@ define "main/controller", requirements, ->
     constructor: (app) ->
       app.controller "MainCtrl#index", ($scope) ->
         $scope.stuff = "stuff"
+        

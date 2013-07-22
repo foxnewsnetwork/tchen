@@ -1,7 +1,9 @@
 div.blogpost
   h4.blog-title
-    a(href="{{blogpost.link}}") {{blogpost.title}}
+    {{blogpost.title}}
+    span.right-date {{blogpost.created_at}}
   div.blog-contents
     span.image-left(class="{{blogpost | blogPostImageClass }}")
-      img(src="{{blogpost.image}}")
+      a(href="{{blogpost.image}}")
+        img(src="{{blogpost.image}}")
     {{blogpost.content}}

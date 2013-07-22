@@ -68,7 +68,7 @@ handleNewUser = method GET handleForm <|> method POST handleFormSubmit
 -- | Handle blogposts#index... Haskell is hard and doesn't make much sense
 handleBlogpostIndex :: Handler App Postgres ()
 handleBlogpostIndex = do
-  blogposts <- query_ "SELECT * FROM blogposts"
+  blogposts <- query_ "SELECT * FROM blogposts ORDER BY id DESC"
   writeLBS $ J.encode (blogposts :: [BlogPost])
 
 

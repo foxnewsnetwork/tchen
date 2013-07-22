@@ -12,9 +12,18 @@
     border-bottom: 1px solid #e5e5e5;
     padding-bottom: 5px;
   }
+  .right-date {
+    font-size: 10px;
+    float: right;
+    color: #949494;
+  }
   .image-left {
     float: left;
     margin-right: 10px;
+
+    &.no-image {
+      display: none;
+    }
     img {
       width: 125px;
       height: 125px;

@@ -4,5 +4,5 @@ define "config/bootstrap", requirements, (Router)->
   class Bootstrap
     @doit = -> new Bootstrap()
     constructor: ->
-      @app = angular.module('tchenApp', [])
+      @app = angular.module('tchenApp', ['ngResource'])
       new Router @app
