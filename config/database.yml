@@ -49,7 +49,7 @@ test:
   database: tchen_test
   pool: 5
   username: shinka
-  password:
+  password: 1234567
 
 production:
   adapter: postgresql
@@ -57,4 +57,4 @@ production:
   database: tchen_production
   pool: 5
   username: shinka
-  password:
+  password: 1234567

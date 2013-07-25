@@ -13,6 +13,7 @@ require.config
     "navigation/directive": "scripts/navigation/directive",
     "navigation/controller": "scripts/navigation/controller",
     "navigation/model": "scripts/navigation/model",
+    "navigation/filter": "scripts/navigation/filter",
     "blogpost": "scripts/blogpost",
     "blogpost/controller": "scripts/blogpost/controller",
     "blogpost/directive": "scripts/blogpost/directive",

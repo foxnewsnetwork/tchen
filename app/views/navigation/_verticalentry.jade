@@ -1,0 +1,6 @@
+li(class="{{nav | navigationActiveClass}}")
+  a(href="{{nav.href}}") 
+    i(class="{{ nav | navigationChevronClass }}")
+    span.nav-link{{nav.link}}
+li.nav-children(ng-repeat="child in nav.children", class="{{ nav | navigationChildrenClass}}")
+  a(href="{{child.href}}") {{nav.link}}
