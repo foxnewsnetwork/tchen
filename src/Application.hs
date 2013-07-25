@@ -29,6 +29,25 @@ makeLenses ''App
 instance HasHeist App where
     heistLens = subSnaplet heist
 
+data NavTag = NavTag 
+  { parent_id :: Maybe Integer
+  , name :: T.Text
+  , tag_id :: Integer }
+
+instance ToJSON NavTag where
+  toJSON (NavTag pid name i) =
+    let   keys = map T.pack ["id", "name", "parent_id"]
+          values = [show i, show name, show pid]
+    in    object $ zipWith (J..=) keys values
+
+instance FromRow NavTag where
+  fromRow = do
+    tag_id <- field
+    name <- field
+    parent_id <- field
+    return $ NavTag parent_id name tag_id
+
+
 data BlogPost = BlogPost 
   { blog_id :: Integer
   , title :: T.Text

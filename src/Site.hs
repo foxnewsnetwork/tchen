@@ -72,10 +72,16 @@ handleBlogpostIndex = do
   writeLBS $ J.encode (blogposts :: [BlogPost])
 
 
+handleTagIndex :: Handler App Postgres ()
+handleTagIndex = do
+  tags <- query_ "SELECT * FROM tags WHERE parent_id IS NULL ORDER BY id DESC LIMIT 10"
+  writeLBS $ J.encode (tags :: [NavTag])
+
 -----------------------------------------------------------------------------
 -- | The application's routes.
 routes :: [(ByteString, Handler App App ())]
 routes = [ ("/bps",      with pg handleBlogpostIndex)
+         , ("/tags",     with pg handleTagIndex)
          , ("/login",    with auth handleLoginSubmit)
          , ("/logout",   with auth handleLogout)
          , ("/new_user", with auth handleNewUser)
