@@ -72,21 +72,30 @@ handleBlogpostIndex = do
   writeLBS $ J.encode (blogposts :: [BlogPost])
 
 
+handleTagShow :: Handler App Postgres ()
+handleTagShow = do
+  name <- getParam "name"
+  tag <- query "SELECT * FROM tags WHERE name = ? LIMIT 1" (Only name)
+  writeLBS $ J.encode (tag :: [NavTag])
+
 handleTagIndex :: Handler App Postgres ()
 handleTagIndex = do
-  tags <- query_ "SELECT * FROM tags WHERE parent_id IS NULL ORDER BY id DESC LIMIT 10"
-  writeLBS $ J.encode (tags :: [NavTag])
-
+  parent_id <- getParam "id"
+  tags <- tagsMaker parent_id
+  writeLBS $ J.encode (tags :: [NavTag])  
+  where   tagsMaker Nothing = query_ "SELECT * FROM tags WHERE parent_id is NULL ORDER BY id DESC LIMIT 25"
+          tagsMaker (Just x) = query "SELECT * FROM tags WHERE parent_id = ? ORDER BY id DESC LIMIT 25" (Only x)
 -----------------------------------------------------------------------------
 -- | The application's routes.
 routes :: [(ByteString, Handler App App ())]
-routes = [ ("/bps",      with pg handleBlogpostIndex)
-         , ("/tags",     with pg handleTagIndex)
-         , ("/login",    with auth handleLoginSubmit)
-         , ("/logout",   with auth handleLogout)
-         , ("/new_user", with auth handleNewUser)
-         , ("",          serveDirectory ".tmp")
-         , ("",          serveDirectory "app")
+routes = [ ("/bps",              with pg handleBlogpostIndex)
+         , ("/tags",             with pg handleTagIndex)
+         , ("/tag/:name",        with pg handleTagShow)
+         , ("/login",            with auth handleLoginSubmit)
+         , ("/logout",           with auth handleLogout)
+         , ("/new_user",         with auth handleNewUser)
+         , ("",                  serveDirectory ".tmp")
+         , ("",                  serveDirectory "app")
          ]
 
 

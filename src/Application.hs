@@ -37,7 +37,9 @@ data NavTag = NavTag
 instance ToJSON NavTag where
   toJSON (NavTag pid name i) =
     let   keys = map T.pack ["id", "name", "parent_id"]
-          values = [show i, show name, show pid]
+          values = [show i, show name, maybeShow pid]
+          maybeShow Nothing = ""
+          maybeShow (Just x) = show x
     in    object $ zipWith (J..=) keys values
 
 instance FromRow NavTag where
