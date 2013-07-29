@@ -3,7 +3,7 @@ define "config/routes", [], ->
     constructor: (app) ->
       app.config ($routeProvider) ->
         $routeProvider
-          .when '/',
+          .when '/:tag',
             templateUrl: 'views/main/index.html'
             controller: 'MainCtrl#index'
           redirectTo: "/"

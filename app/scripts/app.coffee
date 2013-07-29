@@ -18,7 +18,9 @@ require.config
     "blogpost/controller": "scripts/blogpost/controller",
     "blogpost/directive": "scripts/blogpost/directive",
     "blogpost/model": "scripts/blogpost/model",
-    "blogpost/filter": "scripts/blogpost/filter"
+    "blogpost/filter": "scripts/blogpost/filter",
+    "serial": "scripts/serial",
+    "serial/service": "scripts/serial/service"
   shim:
     "angular-resource": 
       deps: ["angular"]

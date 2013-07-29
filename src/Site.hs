@@ -13,6 +13,7 @@ import           Control.Applicative
 import           Control.Monad
 import           Control.Monad.IO.Class
 import           Data.ByteString (ByteString)
+import           Data.ByteString.Char8
 import           Data.Maybe
 import qualified Data.Text as T
 import           Snap.Core
@@ -80,11 +81,13 @@ handleTagShow = do
 
 handleTagIndex :: Handler App Postgres ()
 handleTagIndex = do
-  parent_id <- getParam "id"
+  parent_id <- liftM toMaybeInteger (getParam "id")
   tags <- tagsMaker parent_id
   writeLBS $ J.encode (tags :: [NavTag])  
   where   tagsMaker Nothing = query_ "SELECT * FROM tags WHERE parent_id is NULL ORDER BY id DESC LIMIT 25"
           tagsMaker (Just x) = query "SELECT * FROM tags WHERE parent_id = ? ORDER BY id DESC LIMIT 25" (Only x)
+          toMaybeInteger Nothing = Nothing
+          toMaybeInteger (Just x) = liftM fst $ readInt x
 -----------------------------------------------------------------------------
 -- | The application's routes.
 routes :: [(ByteString, Handler App App ())]
