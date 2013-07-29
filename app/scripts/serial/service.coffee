@@ -14,7 +14,7 @@ define "serial/service", [], ->
       @_actions.pop()
     _register_action: (action) ->
       @_actions ||= []
-      @_actions.push action
+      @_actions.unshift action
 
 
   class Service

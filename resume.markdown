@@ -15,7 +15,7 @@ B.S., Mechanical Engineering, 2007- 2011 from UC Berkeley
 #### Web Application Engineer - (12/12 - Present)
 - Coded up various features, fixes, and tools in Ruby, Javascript, and CSS
 - Implemented external interfaces to connect with sites like Twitter, Facebook, Zendesk, Google Checkout, etc.
-- Created ruby capybara flow divergence-merge based integration testing framework for continous integration testing.
+- Created a flow-divergence-merge based integration testing framework for continous integration testing with ruby and capybara.
 
 ### InGidio Inc. - 440 N Wolfe Road, Sunnyvale, CA
 #### Full Stack Engineer - (8/11 - 6/12)
