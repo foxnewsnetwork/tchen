@@ -7,12 +7,11 @@ basePath = '';
 files = [
   JASMINE,
   JASMINE_ADAPTER,
-  'app/components/angular/angular.js',
-  'app/components/angular-mocks/angular-mocks.js',
-  'app/scripts/*.js',
-  'app/scripts/**/*.js',
-  'test/mock/**/*.js',
-  'test/spec/**/*.js'
+  REQUIRE,
+  REQUIRE_ADAPTER,
+  '.tmp/test/app_spec.js',
+  {pattern: '.tmp/**/*.js', included: false},
+  {pattern: 'app/components/**/*.js', included: false}
 ];
 
 // list of files to exclude
@@ -53,4 +52,4 @@ captureTimeout = 5000;
 
 // Continuous Integration mode
 // if true, it capture browsers, run tests and exit
-singleRun = false;
+singleRun = true;

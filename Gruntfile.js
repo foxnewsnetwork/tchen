@@ -30,7 +30,7 @@ module.exports = function (grunt) {
         tasks: ['jade:dist']
       },
       coffeeTest: {
-        files: ['test/spec/{,*/}*.coffee'],
+        files: ['test/{,*/}{,*/}{,*/}*.coffee'],
         tasks: ['coffee:test']
       },
       compass: {
@@ -46,6 +46,10 @@ module.exports = function (grunt) {
           '<%= yeoman.app %>/images/{,*/}*.{png,jpg,jpeg,gif,webp,svg}'
         ],
         tasks: ['livereload']
+      },
+      livetest: {
+        files: ['{.tmp,test}/{,*/}{,*/}{,*/}{,*/}.{js,coffee}'],
+        tasks: ['livetest']
       }
     },
     connect: {
@@ -53,6 +57,17 @@ module.exports = function (grunt) {
         port: 9000,
         // Change this to '0.0.0.0' to access the server from outside.
         hostname: 'localhost'
+      },
+      livetest: {
+        options: {
+          middleware: function(connect) {
+            return [
+              mountFolder(connect, "test"),
+              mountFolder(connect, '.tmp'),
+              mountFolder(connect, yeomanConfig.app)
+            ];
+          }
+        }
       },
       livereload: {
         options: {
@@ -65,16 +80,6 @@ module.exports = function (grunt) {
           }
         }
       },
-      test: {
-        options: {
-          middleware: function (connect) {
-            return [
-              mountFolder(connect, '.tmp'),
-              mountFolder(connect, 'test')
-            ];
-          }
-        }
-      }
     },
     open: {
       server: {
@@ -152,9 +157,9 @@ module.exports = function (grunt) {
       test: {
         files: [{
           expand: true,
-          cwd: 'test/spec',
-          src: '{,*/}*.coffee',
-          dest: '.tmp/spec',
+          cwd: 'test/',
+          src: '{,*/}{,*/}{,*/}*.coffee',
+          dest: '.tmp/test',
           ext: '.js'
         }]
       }
@@ -313,8 +318,9 @@ module.exports = function (grunt) {
     'coffee',
     'jade',
     'compass',
-    'connect:test',
-    'karma'
+    'connect:livetest',
+    'open',
+    'watch'
   ]);
 
   grunt.registerTask('build', [
