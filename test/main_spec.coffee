@@ -8,4 +8,4 @@ define "main_spec", requirements, (Main, CtrlSpec) ->
       Main.public_static_void app
       new MainSpec app
     constructor: (app) ->
-      new CtrlSpec app
+      CtrlSpec app

@@ -15,6 +15,7 @@
       text-align: left;
       &.nav-children {
         margin-left: 15px;
+        text-transform: capitalize;
       }
       span.nav-link {
         padding-left: 10px;
@@ -46,6 +47,10 @@
            -moz-border-radius: 0 0 6px 6px;
                 border-radius: 0 0 6px 6px;
       }
+    }
+
+    .active {
+      border-bottom: 1px solid #e6e6e6;
     }
 
     .active > a {

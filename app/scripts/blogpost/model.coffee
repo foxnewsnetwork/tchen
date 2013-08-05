@@ -13,7 +13,7 @@ define "blogpost/model", ['faker'], (F) ->
       m.updated_at = protomodel.updated_at
       m
     @find_all: (category, callback) ->
-      Model.service("method": "GET", "url":"/bps").success (protomodels, status, headers, config) ->
+      Model.service("method": "GET", "url":"/bps?tag_id=#{category}").success (protomodels, status, headers, config) ->
         blogposts = protomodels.map Model.from_object
         callback blogposts if callback?
     constructor: ->

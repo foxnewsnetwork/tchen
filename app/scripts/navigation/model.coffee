@@ -1,10 +1,11 @@
 define "navigation/model", ['faker'], (F) ->
   class Model
     @generate: -> new Model()
-    @merge: (name, children, parents) ->
+    @merge: (id, children, parents) ->
       parents.map (parent) ->
-        if parent.name is name
+        if parent.id is id
           parent.children = children
+        parent
     @from_json: (json) ->
       m = Model.generate()
       m.id = json['id']
@@ -19,17 +20,12 @@ define "navigation/model", ['faker'], (F) ->
     @get_navs: (active_tag, callback) ->
       Model.$q.defer()
       .then (q) -> 
-        console.log "registering parents"
         Model.fetch_parents (tags) ->
-          console.log "parents: "
-          console.log tags
           parents = tags
           q.resolve tags
       .then (q, parents) ->
-        console.log "registering children"
         if active_tag?
           Model.fetch_children active_tag, (tags) ->
-            console.log "children: "
             console.log tags
             parents = Model.merge(active_tag, tags, parents)
             q.resolve parents
@@ -37,8 +33,6 @@ define "navigation/model", ['faker'], (F) ->
           parents = Model.merge(active_tag, [], parents)
           q.resolve parents
       .then (q, tags) ->
-        console.log "callback: "
-        console.log tags
         q.resolve callback tags
       .resolve()
     @fetch_children: (parent_id, callback) ->

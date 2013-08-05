@@ -1,0 +1,7 @@
+%h1.title= @blogpost.title
+%p.content= @blogpost.content
+
+= form_tag tag_blogpost_path(@blogpost) do |f|
+  = label_tag :tag, :name
+  = text_field_tag :tag, :name
+  = submit_tag

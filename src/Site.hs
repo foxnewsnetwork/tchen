@@ -69,9 +69,11 @@ handleNewUser = method GET handleForm <|> method POST handleFormSubmit
 -- | Handle blogposts#index... Haskell is hard and doesn't make much sense
 handleBlogpostIndex :: Handler App Postgres ()
 handleBlogpostIndex = do
-  blogposts <- query_ "SELECT * FROM blogposts ORDER BY id DESC"
+  tag_id <- liftM toMaybeInteger (getParam "tag_id")
+  blogposts <- postMaker tag_id
   writeLBS $ J.encode (blogposts :: [BlogPost])
-
+  where   postMaker Nothing = query_ "SELECT * FROM blogposts ORDER BY id DESC"
+          postMaker (Just x) = query "SELECT b.* FROM blogposts AS b INNER JOIN blogpost_tag_relationships AS r ON b.id = r.blogpost_id WHERE r.tag_id = ? ORDER BY b.id DESC" (Only x)
 
 handleTagShow :: Handler App Postgres ()
 handleTagShow = do
@@ -86,8 +88,10 @@ handleTagIndex = do
   writeLBS $ J.encode (tags :: [NavTag])  
   where   tagsMaker Nothing = query_ "SELECT * FROM tags WHERE parent_id is NULL ORDER BY id DESC LIMIT 25"
           tagsMaker (Just x) = query "SELECT * FROM tags WHERE parent_id = ? ORDER BY id DESC LIMIT 25" (Only x)
-          toMaybeInteger Nothing = Nothing
-          toMaybeInteger (Just x) = liftM fst $ readInt x
+
+toMaybeInteger :: Maybe ByteString -> Maybe Int
+toMaybeInteger Nothing = Nothing
+toMaybeInteger (Just x) = liftM fst $ readInt x
 -----------------------------------------------------------------------------
 -- | The application's routes.
 routes :: [(ByteString, Handler App App ())]
