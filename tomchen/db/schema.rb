@@ -18,8 +18,11 @@ ActiveRecord::Schema.define(version: 20130731223738) do
     t.integer "tag_id"
   end
 
+  add_index "blogpost_tag_relationships", ["tag_id"], name: "index_blogpost_tag_relationships_on_tag_id", using: :btree
+
   create_table "blogposts", force: true do |t|
     t.string   "title"
+    t.string   "external_link"
     t.text     "content"
     t.datetime "created_at"
     t.datetime "updated_at"

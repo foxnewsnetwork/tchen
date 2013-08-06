@@ -1,11 +1,17 @@
 = form_for @blogpost do |f|
   %legend= "Blogpost writer"
   %fieldset
-    = f.label :title
-    = f.text_field :title
+    %section.title
+      = f.label :title
+      = f.text_field :title
 
-    = f.label :content
-    = f.text_area :content
+    %section.content
+      = f.label :content
+      = f.text_area :content
+
+    %section.link
+      = f.label :external_link
+      = f.text_field :external_link
 
   .submit-section
     = f.submit

@@ -53,30 +53,30 @@ instance FromRow NavTag where
 data BlogPost = BlogPost 
   { blog_id :: Integer
   , title :: T.Text
+  , external_link :: T.Text
   , content :: T.Text
   , updated_at :: LocalTime
   , created_at :: LocalTime }
 
 instance ToJSON BlogPost where
-  toJSON (BlogPost i t c ua ca) = 
-    let   keys = map T.pack ["id", "title", "content", "updated_at", "created_at"]
-          values = [show i, show t, show c, show ua, show ca]
+  toJSON (BlogPost i t el c ua ca) = 
+    let   keys = map T.pack ["id", "title", "external_link", "content", "updated_at", "created_at"]
+          values = [show i, show t, show el, show c, show ua, show ca]
     in    object $ zipWith (J..=) keys values
 
 instance FromRow BlogPost where
   fromRow = do
     i <- field
     t <- field
+    el <- field
     c <- field
     up <- field
     cr <- field
-    return $ BlogPost i t c up cr
+    return $ BlogPost i t el c up cr
 
 instance HasPostgres (Handler b App) where
     getPostgresState = with pg get
 
-instance Show BlogPost where
-  show (BlogPost _ t c ua ca) = "{ title: '" ++ show t ++ "', content: '" ++ show c ++ "', updated_at: '" ++ show ua ++ "', created_at: '" ++ show ca ++ "' }"
 ------------------------------------------------------------------------------
 type AppHandler = Handler App App
 

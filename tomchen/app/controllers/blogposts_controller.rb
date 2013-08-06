@@ -31,6 +31,6 @@ class BlogpostsController < ApplicationController
   end
 
   def _blogpost_params
-    params.require(:blogpost).permit(:title, :content)
+    params.require(:blogpost).permit(:title, :content, :external_link)
   end
 end

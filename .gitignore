@@ -1,7 +1,7 @@
 node_modules
-dist
-distjs
 .tmp
+distjs
+dist
 .sass-cache
 app/components
 cabal-dev
