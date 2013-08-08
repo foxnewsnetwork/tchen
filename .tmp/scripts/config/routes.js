@@ -7,6 +7,9 @@
           $routeProvider.when('/:tag', {
             templateUrl: 'views/main/index.html',
             controller: 'MainCtrl#index'
+          }).when('/', {
+            templateUrl: 'views/main/index.html',
+            controller: 'MainCtrl#index'
           });
           return {
             redirectTo: "/"
